@@ -29,9 +29,9 @@ class EventAdmin(admin.ModelAdmin):
 
 
 class EventBookingAdmin(admin.ModelAdmin):
-    list_display = ['user_name', 'event_name', 'event_time', 'amount', 'booking_time']
-    search_fields = ['user_name', 'event_name', 'amount']
-    list_filter = ['user_name', 'event_name', 'amount']
+    list_display = ['user_name', 'event_place', 'event_time', 'amount', 'booking_time']
+    search_fields = ['user_name', 'event_place', 'amount']
+    list_filter = ['user_name', 'event_place', 'amount']
 
 
 admin.site.register(CustomUser, CustomUserAdmin)

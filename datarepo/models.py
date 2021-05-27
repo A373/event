@@ -11,7 +11,7 @@ class CustomUser(AbstractUser):
 
 
 class Event(models.Model):
-    name = models.CharField(max_length=255, null=True, blank=True)
+    name = models.CharField(max_length=255, unique=True)
     place = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
@@ -22,8 +22,8 @@ class Event(models.Model):
 
 
 class EventBooking(models.Model):
-    user_name = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
-    event_name = models.ForeignKey(Event, on_delete=models.SET_NULL, null=True, blank=True)
+    user_name = models.OneToOneField(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
+    event_place = models.ForeignKey(Event, on_delete=models.SET_NULL, null=True, blank=True)
     event_time = models.DateTimeField(null=True, blank=True)
     amount = models.IntegerField()
     booking_time = models.DateTimeField()
