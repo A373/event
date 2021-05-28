@@ -10,23 +10,36 @@ class CustomUser(AbstractUser):
     created = models.DateTimeField(null=True, blank=True)
 
 
-class Event(models.Model):
-    EVENT_TYPES = [
-        ('Blood donation', 'Blood donation')
+class EventPlace(models.Model):
+    EVENT_PLACES = [
+        ('Karimnagar', 'Karimnagar'),
+        ('Hyderabad', 'Hyderabad'),
+        ('Warangal', 'Warangal'),
     ]
-    name = models.CharField(max_length=255, choices=EVENT_TYPES)
-    place = models.CharField(max_length=255, null=True, blank=True)
+    place = models.CharField(max_length=255, choices=EVENT_PLACES)
 
     def __str__(self):
-        return str(self.name) + '-' + str(self.place)
+        return str(self.place)
 
     class Meta:
-        verbose_name_plural = 'events'
+        verbose_name_plural = 'event_places'
+
+
+class EventName(models.Model):
+    name = models.CharField(max_length=255, unique=True)
+
+    def __str__(self):
+        return str(self.name)
+
+    class Meta:
+        verbose_name_plural = 'event_names'
 
 
 class EventBooking(models.Model):
     user_name = models.ForeignKey(CustomUser, on_delete=models.SET_NULL, null=True, blank=True)
-    event_place = models.ForeignKey(Event, on_delete=models.SET_NULL, null=True, blank=True)
+    event_name = models.ForeignKey(EventName, on_delete=models.SET_NULL, null=True, blank=True)
+    event_place = models.OneToOneField(EventPlace,
+                                       on_delete=models.SET_NULL, null=True, blank=True)
     event_time = models.DateTimeField(null=True, blank=True)
     amount = models.IntegerField()
     booking_time = models.DateTimeField()
