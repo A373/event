@@ -68,8 +68,3 @@ def add_event(request):
                 'message': 'name has to be string'
             }
             return Response(content, status=status.HTTP_400_BAD_REQUEST)
-        # except IntegrityError:
-        # content = {
-        #    'message': 'invalid event_id'
-        # }
-        # return Response(content, status=status.HTTP_400_BAD_REQUEST)
