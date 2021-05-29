@@ -11,12 +11,7 @@ class CustomUser(AbstractUser):
 
 
 class EventPlace(models.Model):
-    EVENT_PLACES = [
-        ('Karimnagar', 'Karimnagar'),
-        ('Hyderabad', 'Hyderabad'),
-        ('Warangal', 'Warangal'),
-    ]
-    place = models.CharField(max_length=255, choices=EVENT_PLACES)
+    place = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
         return str(self.place)
